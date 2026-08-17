@@ -43,6 +43,10 @@
     #eab-code .wipcard img{display:block;width:100%;height:154px;object-fit:contain;object-position:center;background:#f6f8fa;border-bottom:1px solid var(--line)}
     #eab-code .wipcap{font-size:12px;color:var(--mut);padding:8px 10px 10px;line-height:1.42}
     #eab-code .wipcap b{color:var(--ink)}
+    #eab-code .wiplist{list-style:none;margin:4px 0 2px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:7px 18px}
+    #eab-code .wiplist li{font-size:12.5px;color:var(--mut);line-height:1.45}
+    #eab-code .wiplist a{font-weight:700;color:var(--acc2);text-decoration:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    #eab-code .wiplist a:hover{color:var(--acc);text-decoration:underline}
     #eab-code .noresults{display:none;padding:22px 4px;color:var(--mut);font-size:14px}
     #eab-code .foot{margin:22px 0 0;padding-top:14px;border-top:1px solid var(--line);font-size:13.5px;color:var(--mut)}
     #eab-code .foot a{color:var(--acc);font-weight:600;text-decoration:none}
@@ -234,15 +238,15 @@
         </a>
       </div>
       <div class="lbl">More local utilities</div>
-      <div class="links">
-        <a class="pill" title="Clear the Stata Results window (option -logo- reprints the Stata banner)." href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">cls</a>
-        <a class="pill" title="Drop variables (or, with -obs-, observations) whose share of missing values exceeds a threshold." href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">cdropmiss</a>
-        <a class="pill" title="Extended drop / keep: returns counts, targets tempvars, exact -ds- matching." href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">edrop</a>
-        <a class="pill" title="Compile a LaTeX .tex file to PDF from Stata (macOS / Windows)." href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">typeset</a>
-        <a class="pill" title="Open a Google (or Statalist) search from Stata in your browser." href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">google</a>
-        <a class="pill" title="Stash constant variables as dataset characteristics (companion: chars2constants restores them)." href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">constants2chars</a>
-        <a class="pill" title="Rebuild variables from stored _dta characteristics (companion to constants2chars)." href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">chars2constants</a>
-      </div>
+      <ul class="wiplist">
+        <li><a href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">cls</a> &mdash; clears the Stata Results window; the <code>logo</code> option reprints the Stata banner.</li>
+        <li><a href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">cdropmiss</a> &mdash; drops variables (or, with <code>obs</code>, observations) whose share of missing values passes a threshold.</li>
+        <li><a href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">edrop</a> &mdash; an extended drop / keep that returns counts, can target temporary variables, and matches names exactly.</li>
+        <li><a href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">typeset</a> &mdash; compiles a LaTeX <code>.tex</code> file to a PDF straight from Stata (macOS or Windows).</li>
+        <li><a href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">google</a> &mdash; opens a Google (or Statalist) search from Stata in your web browser.</li>
+        <li><a href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">constants2chars</a> &mdash; stashes constant-valued variables as dataset characteristics to slim a file down.</li>
+        <li><a href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">chars2constants</a> &mdash; rebuilds those variables back from the stored characteristics (the companion to constants2chars).</li>
+      </ul>
       <div class="links" style="margin-top:12px">
         <a class="pill demo" href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">Open the Drive folder &#8599;</a>
       </div>
