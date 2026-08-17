@@ -1,5 +1,4 @@
-Code portfolio at:
-
+Code portfolio posted at:
 [https://ericabooth.github.io/code-portfolio/](https://ericabooth.github.io/code-portfolio/)
-and 
-(https://sites.google.com/site/ericabooth/cv/code)[https://sites.google.com/site/ericabooth/cv/code]
+and on my personal site 
+[here](https://sites.google.com/site/ericabooth/cv/code)
