@@ -142,6 +142,7 @@
         <a class="pill demo" href="https://ericabooth.github.io/Webdoc2_Example_Site/" target="_blank" rel="noopener">Webdoc2 &#8599;</a>
         <a class="pill demo" href="https://ericabooth.github.io/Sparkta2_Example_Site/" target="_blank" rel="noopener">Sparkta2 maps &#8599;</a>
         <a class="pill demo" href="galleries/mergemap/" target="_blank" rel="noopener">mergemap gallery &#8599;</a>
+        <a class="pill demo" href="galleries/surveymap/" target="_blank" rel="noopener">surveymap gallery &#8599;</a>
       </div>
     </div>
 
@@ -194,7 +195,7 @@
         <span class="pkg"><a class="pill" title="Apply variable labels from a two-column (Variable, Label) crosswalk." href="https://github.com/ericabooth/applyvarlabels-stata-public" target="_blank" rel="noopener">applyvarlabels</a><a class="pill ssc" title="ssc install applyvarlabels" href="https://ideas.repec.org/c/boc/bocode/s459844.html" target="_blank" rel="noopener">SSC</a></span>
         <span class="pkg"><a class="pill" title="Stamp variables with source lineage and search that provenance later." href="https://github.com/ericabooth/srctag-stata-public" target="_blank" rel="noopener">srctag</a></span>
         <span class="pkg"><a class="pill" title="Rebuild a cross-wave survey codebook from a long-format crosswalk." href="https://github.com/ericabooth/cxchangelog-stata-public" target="_blank" rel="noopener">cxchangelog</a></span>
-        <span class="pkg"><a class="pill" title="Map how respondents moved through a survey: who was asked, who answered, who was routed around." href="https://github.com/ericabooth/surveymap-stata-public" target="_blank" rel="noopener">surveymap</a></span>
+        <span class="pkg"><a class="pill" title="Map how respondents moved through a survey: who was asked, who answered, who was routed around." href="https://github.com/ericabooth/surveymap-stata-public" target="_blank" rel="noopener">surveymap</a><a class="pill demo" title="Every surveymap output, on one worked example" href="galleries/surveymap/" target="_blank" rel="noopener">Gallery &#8599;</a></span>
       </div>
       <div class="lbl">De-identify for release</div>
       <div class="links">
@@ -307,8 +308,8 @@
         </a>
         <div class="gx-txt">
           <div class="gx-pkg">mergemap</div>
-          <h3>The same map as mermaid, which GitHub renders itself</h3>
-          <p><code>draw, export(mermaid)</code> writes plain text naming the boxes and arrows. Paste that text into a README, a wiki or Quarto and the diagram renders there, so re-exporting is all it takes to update the picture.</p>
+          <h3>The same map as mermaid text</h3>
+          <p><code>draw, export(mermaid)</code> writes plain text naming the boxes and arrows. Paste that text into a README, a wiki or Quarto, and those pages render the diagram from it; to update the picture, re-export the text.</p>
           <div class="links"><a class="pill" href="https://github.com/ericabooth/mergemap-stata-public" target="_blank" rel="noopener">Code</a><a class="pill demo" href="galleries/mergemap/" target="_blank" rel="noopener">Full gallery &#8599;</a></div>
           <div class="gx-full">Click the image for full size.</div>
         </div>
@@ -321,7 +322,7 @@
           <div class="gx-pkg">surveymap</div>
           <h3>Who was asked, who answered, who the instrument routed around</h3>
           <p>A column that is 52% missing is either a question people refused or a question they were never shown. surveymap counts refusals and skips separately for every item, and draws the path through the questionnaire that the answers imply.</p>
-          <div class="links"><a class="pill" href="https://github.com/ericabooth/surveymap-stata-public" target="_blank" rel="noopener">Code</a></div>
+          <div class="links"><a class="pill" href="https://github.com/ericabooth/surveymap-stata-public" target="_blank" rel="noopener">Code</a><a class="pill demo" href="galleries/surveymap/" target="_blank" rel="noopener">Full gallery &#8599;</a></div>
           <div class="gx-full">Click the image for full size.</div>
         </div>
       </article>
@@ -332,7 +333,7 @@
         <div class="gx-txt">
           <div class="gx-pkg">dashboardbuilder</div>
           <h3>A dashboard your reader can keep</h3>
-          <p>Pick a state and every tile and bar re-reads for it, against a reference unit you choose. The build writes one HTML file that opens offline, with per-panel CSV and a save-as-PDF button.</p>
+          <p>Pick a state and every tile and bar updates for it, against a reference unit you choose. The build writes one HTML file that opens offline, with per-panel CSV and a save-as-PDF button.</p>
           <div class="links"><a class="pill" href="https://github.com/ericabooth/dashboardbuilder-stata-public" target="_blank" rel="noopener">Code</a><a class="pill demo" href="https://ericabooth.github.io/dashboardbuilder_Example_Site/" target="_blank" rel="noopener">Live demo &#8599;</a></div>
           <div class="gx-full">Click the image for full size.</div>
         </div>
@@ -391,8 +392,8 @@
         </a>
         <div class="gx-txt">
           <div class="gx-pkg">datadictionary</div>
-          <h3>A codebook that remembers the last wave</h3>
-          <p>One row per variable per wave, with the statistics, labels, notes and value labels in adjacent columns, and a Changes sheet naming every wave-to-wave difference the flags draw from.</p>
+          <h3>One codebook across waves, every change listed</h3>
+          <p>One row per variable per wave, with the statistics, labels, notes and value labels in adjacent columns, and a Changes sheet that lists every wave-to-wave difference behind the flags.</p>
           <div class="links"><a class="pill" href="https://github.com/ericabooth/datadictionary-stata-public" target="_blank" rel="noopener">Code</a><a class="pill" href="https://ideas.repec.org/c/boc/bocode/s459840.html" target="_blank" rel="noopener">SSC</a></div>
           <div class="gx-full">Click the image for full size.</div>
         </div>
@@ -403,7 +404,7 @@
         </a>
         <div class="gx-txt">
           <div class="gx-pkg">tablepngs</div>
-          <h3>LaTeX tables that reach Word intact</h3>
+          <h3>LaTeX tables kept intact in Word</h3>
           <p>Each table becomes a high-resolution image, and the script then compiles the rewritten document and checks page by page that the layout still matches the original.</p>
           <div class="links"><a class="pill" href="https://github.com/ericabooth/TablePNGs-latex-public" target="_blank" rel="noopener">Code</a></div>
           <div class="gx-full">Click the image for full size.</div>
@@ -462,7 +463,7 @@
     <a href="https://github.com/ericabooth" target="_blank" rel="noopener">github.com/ericabooth &#8594;</a>;
     all my Stata modules are also on <a href="https://ideas.repec.org/f/pbo536.html" target="_blank" rel="noopener">RePEc / SSC &#8594;</a>.
     <span class="legend">A <span class="tag">SSC</span> tag means the package installs with <code>ssc install &lt;name&gt;</code>.
-    Longer walkthroughs are in the <a href="galleries/mergemap/" target="_blank" rel="noopener">mergemap gallery</a> and on the
+    Longer walkthroughs are in the <a href="galleries/mergemap/" target="_blank" rel="noopener">mergemap</a> and <a href="galleries/surveymap/" target="_blank" rel="noopener">surveymap</a> galleries and on the
     <a href="https://ericabooth.github.io/Sparkta2_Example_Site/" target="_blank" rel="noopener">sparkta2</a>,
     <a href="https://ericabooth.github.io/dashboardbuilder_Example_Site/" target="_blank" rel="noopener">dashboardbuilder</a>,
     <a href="https://ericabooth.github.io/StataShiny_Example_Site/" target="_blank" rel="noopener">statashiny</a>,
