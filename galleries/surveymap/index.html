@@ -21,68 +21,72 @@ iframe { width: 100%; height: 540px; border: 1px solid #d8dde2; border-radius: 6
 .open a:hover { text-decoration: underline; }
 </style></head><body>
 
-<h1>surveymap, on one worked example</h1>
-<p class="sub">A Stata command that reads a survey dataset and shows, for every item,
-who was asked, who answered, who declined, and who the instrument routed around it.</p>
+<h1>surveymap gallery</h1>
+<p class="sub">surveymap is a Stata command that maps how respondents moved through
+a survey. For every item it separates the people who answered from the people who
+declined and from the people the skip logic routed past.</p>
 <p class="nav"><a href="https://github.com/ericabooth/surveymap-stata-public">Code on GitHub</a> &#183;
 <a href="https://github.com/ericabooth/surveymap-stata-public#readme">README</a> &#183;
 <a href="../../">back to the code portfolio</a></p>
 
-<p>Every page below comes from one fake 1,200-person poll with skip logic:
-a consent question, a party question, and a voting question that routes
-non-voters around the vote-choice items. <code>gallery/runall.do</code> in the
-repository regenerates all of it, so what you see here is command output
-with nothing hand-edited.</p>
+<p>Every page below comes from a fake 1,200-person poll with skip logic: a
+consent question, a party question, and a voting question that routes
+non-voters around the vote-choice items. Running <code>gallery/runall.do</code>
+in the repository regenerates every file here, so each page shows the
+command's own output.</p>
 
 <h2>The flow map</h2>
 <p>The spine runs left to right in questionnaire order. Where a gate splits the
-sample, the spine fans into lanes; a dashed grey box is a question that lane was
-never shown. Hover any box for the full record behind it, and read the
-step-by-step guide the page writes in the survey's own item names.</p>
+sample, the spine fans into lanes, and a dashed grey box marks a question that
+lane was never shown. Hover any box for its full record; the page also opens
+with a reading guide written in the survey's own item names.</p>
 <iframe src="g_map.html" title="surveymap flow map" loading="lazy"></iframe>
-<p class="open">The live page: <a href="g_map.html">g_map.html</a> &#183;
-the same survey split by respondent behaviour instead of by an answer:
-<a href="g_profile.html">g_profile.html</a></p>
+<p class="open">The live page is <a href="g_map.html">g_map.html</a>;
+<a href="g_profile.html">g_profile.html</a> splits the same survey by
+respondent behaviour instead of by an answer.</p>
 
 <h2>The response braid</h2>
-<p>The flow map follows the routing; the braid follows the answers. Each item is
-a column, each common answer a block, and each ribbon counts the respondents who
-gave one pair of answers on neighboring items. The table under the figure lists
-the most common complete paths end to end.</p>
+<p>The flow map above follows the routing; this view follows the answers. Each
+item becomes a column, each common answer becomes a block, and each ribbon
+counts the respondents who gave one pair of answers on neighboring items. The
+table under the figure lists the most common complete paths end to end.</p>
 <iframe src="g_paths.html" title="surveymap response braid" loading="lazy"></iframe>
-<p class="open">The live page: <a href="g_paths.html">g_paths.html</a> &#183;
-with the two most common paths highlighted and everything else faded:
-<a href="g_paths_hl.html">g_paths_hl.html</a> &#183;
-with each item's answer shares drawn inside its box on the routing map:
-<a href="g_responses.html">g_responses.html</a></p>
+<p class="open">The live page is <a href="g_paths.html">g_paths.html</a>. In
+<a href="g_paths_hl.html">g_paths_hl.html</a>, <code>highlight()</code> keeps
+the two most common paths in full colour and fades the other ribbons. In
+<a href="g_responses.html">g_responses.html</a>, the routing map draws each
+item's answer shares inside its box.</p>
 
-<h2>The band chart, for a long instrument</h2>
-<p>One thin column per item, split into answered, declined, and not shown,
-stacking to the whole sample. A wide dark block is a filter doing its job; a
-swelling grey band is people being asked and not answering. This is the view
-for a questionnaire too long for any flow map.</p>
+<h2>The band chart</h2>
+<p>For a questionnaire with too many items for a flow map, the band chart draws
+one thin column per item, split into answered, declined, and not shown, so
+every column stacks to the whole sample. A wide block of not shown marks a
+filter working as designed; a growing band of declined marks people who saw
+the questions and stopped answering them.</p>
 <p><img src="g_band.png" alt="surveymap band chart: one stacked column per item across the instrument" loading="lazy" /></p>
 
 <h2>The same map as a figure</h2>
-<p>Through Stata's own graph engine, for a paper or a slide.</p>
+<p>Stata's own graph engine draws the map as a <code>.png</code> or
+<code>.svg</code> for a paper or a slide.</p>
 <p><img src="g_fig.png" alt="surveymap flow map drawn as a Stata twoway figure" loading="lazy" /></p>
 
 <h2>What else the command writes</h2>
 <ul>
 <li><b>The receipt</b>: one line per item in the Results window, with answered,
 declined, not shown, and the earlier answer that routed people past it.</li>
-<li><b>Mermaid text</b> for a README, a wiki, or Quarto, which render the
-diagram from the text.</li>
-<li><b>An Excel tracker</b>: one sheet per level, with counts as numbers so the
-workbook sorts and filters without cleaning.</li>
-<li><b>A tab-separated journal</b>: one line per event, and every picture above
-is rebuilt from it, so a drawing can be re-cut without reading the data again.</li>
-<li><b>A verify report</b>: hand it the questionnaire's declared skip-logic
-table and it marks every item where the file and the instrument disagree about
-who was asked.</li>
+<li><b>Mermaid text</b> for a README, a wiki, or Quarto; those pages render
+the diagram from the text.</li>
+<li><b>An Excel tracker</b>: one sheet per level, with counts stored as
+numbers, so the workbook sorts and filters without any cleanup first.</li>
+<li><b>A tab-separated journal</b>: one line per event. Every picture above is
+rebuilt from the journal, so a drawing can be re-cut without reading the data
+again.</li>
+<li><b>A verify report</b>: give the scan the questionnaire's declared
+skip-logic table, and it marks every item where the file and the instrument
+disagree about who was asked.</li>
 </ul>
 <p>The <a href="https://github.com/ericabooth/surveymap-stata-public">repository</a>
-holds all of these, regenerated by <code>gallery/runall.do</code>, plus the
-help file and the 384-check test battery behind the command.</p>
+contains all of these files, regenerated by <code>gallery/runall.do</code>,
+together with the help file and the 384-check test battery.</p>
 
 </body></html>
