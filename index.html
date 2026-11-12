@@ -9,49 +9,93 @@
 <body>
 <div id="eab-code">
   <style>
-    #eab-code{--ink:#1a1a1a;--mut:#5c6570;--line:#e4e7eb;--bg:#fff;--soft:#f6f8fa;--acc:#0b6b6b;--acc2:#0a4d6b;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);max-width:940px;margin:0 auto;padding:4px 2px 24px;line-height:1.5;-webkit-font-smoothing:antialiased}
+    #eab-code{--ink:#16191c;--mut:#636b73;--line:#e4e8eb;--bg:#fff;--soft:#f7f9fa;--acc:#0b6b6b;--acc2:#0a4d6b;
+      --gold:#8a6a1f;--goldbg:#fdf8ed;--goldln:#eee0c2;
+      --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);
+      max-width:1000px;margin:0 auto;padding:2px 2px 26px;line-height:1.5;-webkit-font-smoothing:antialiased}
     #eab-code *{box-sizing:border-box}
-    #eab-code .lead{font-size:15px;color:var(--mut);margin:0 0 12px}
-    #eab-code .lead a{color:var(--acc);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(11,107,107,.35)}
-    #eab-code .search{position:relative;margin:0 0 14px}
-    #eab-code .search input{width:100%;font-size:14px;padding:10px 14px 10px 34px;border:1px solid var(--line);border-radius:9px;background:var(--soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235c6570' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='21' y1='21' x2='16.6' y2='16.6'/%3E%3C/svg%3E") no-repeat 11px center;color:var(--ink)}
-    #eab-code .search input:focus{outline:none;border-color:var(--acc);background-color:#fff}
-    #eab-code .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
-    #eab-code .chip{cursor:pointer;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;transition:.15s}
+
+    /* ---- masthead ---- */
+    #eab-code .mast{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;
+      padding:0 0 11px;border-bottom:1px solid var(--line);margin:0 0 13px}
+    #eab-code .mast h1{margin:0;font-size:18px;font-weight:700;letter-spacing:-.015em}
+    #eab-code .mast p{margin:5px 0 0;font-size:12.5px;color:var(--mut);max-width:66ch;line-height:1.5}
+    #eab-code .mast a{color:var(--acc);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(11,107,107,.3)}
+    #eab-code .stats{display:flex;gap:20px;flex:none;padding-bottom:1px}
+    #eab-code .stats div{text-align:right}
+    #eab-code .stats b{display:block;font-size:17px;font-weight:700;color:var(--acc);line-height:1.15;font-variant-numeric:tabular-nums}
+    #eab-code .mast code{font-family:var(--mono);font-size:10.5px;background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:1px 4px;color:var(--acc2)}
+    #eab-code .mast .tag{display:inline-block;font-family:var(--mono);font-size:8.5px;font-weight:700;padding:2px 4px;border-radius:4px;color:var(--gold);background:var(--goldbg);border:1px solid var(--goldln);vertical-align:middle;text-transform:uppercase;letter-spacing:.06em}
+    #eab-code .stats span{font-size:9.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#949ca3}
+
+    /* ---- search + filters ---- */
+    #eab-code .search{position:relative;margin:0 0 11px}
+    #eab-code .search input{width:100%;font-size:13px;font-family:inherit;padding:9px 13px 9px 32px;border:1px solid var(--line);
+      border-radius:8px;color:var(--ink);background:var(--soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23636b73' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='21' y1='21' x2='16.6' y2='16.6'/%3E%3C/svg%3E") no-repeat 10px center}
+    #eab-code .search input:focus{outline:none;border-color:var(--acc);background-color:#fff;box-shadow:0 0 0 3px rgba(11,107,107,.08)}
+    #eab-code .filters{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+    #eab-code .chip{cursor:pointer;border:1px solid var(--line);background:var(--bg);color:var(--mut);font-size:12px;
+      font-weight:600;font-family:inherit;padding:5px 11px;border-radius:999px;transition:.12s}
     #eab-code .chip:hover{border-color:var(--acc);color:var(--acc)}
     #eab-code .chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
-    #eab-code .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
-    #eab-code .card{border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px;background:var(--bg);display:flex;flex-direction:column;transition:.15s}
-    #eab-code .card:hover{border-color:#c8d0d8;box-shadow:0 3px 14px rgba(20,30,40,.06)}
-    #eab-code .card h3{margin:0 0 4px;font-size:15.5px;line-height:1.25}
-    #eab-code .card .sol{margin:0 0 11px;font-size:13px;color:var(--mut)}
-    #eab-code .lbl{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);margin:8px 0 6px}
-    #eab-code .links{display:flex;flex-wrap:wrap;gap:7px}
-    #eab-code .pkg{display:inline-flex;gap:4px;align-items:center}
-    #eab-code .pill{display:inline-block;font-size:12.5px;font-weight:600;text-decoration:none;color:var(--acc2);background:var(--soft);border:1px solid var(--line);border-radius:7px;padding:4px 9px;transition:.15s}
-    #eab-code .pill:hover{background:var(--acc);border-color:var(--acc);color:#fff}
-    #eab-code .pill.demo{color:var(--acc);background:#eef6f6;border-color:#cfe6e6}
-    #eab-code .pill.demo:hover{background:var(--acc);color:#fff}
-    #eab-code .pill.ssc{font-size:10.5px;letter-spacing:.03em;padding:4px 7px;color:#8a5a00;background:#fbf3e2;border-color:#efe1c0}
-    #eab-code .pill.ssc:hover{background:#8a5a00;border-color:#8a5a00;color:#fff}
-    #eab-code .tx{font-size:10px;font-weight:700;letter-spacing:.03em;padding:3px 6px;border-radius:6px;color:#274b6d;background:#eaf1f8;border:1px solid #cfe0ef}
-    #eab-code .card.wip{grid-column:1/-1;border-style:dashed;background:#fffdf7}
-    #eab-code .card.wip .pill{background:#fff}
-    #eab-code .wipgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin:6px 0 2px}
-    #eab-code .wipcard{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;transition:.15s}
-    #eab-code .wipcard:hover{border-color:var(--acc);box-shadow:0 3px 14px rgba(20,30,40,.08)}
-    #eab-code .wipcard img{display:block;width:100%;height:154px;object-fit:contain;object-position:center;background:#f6f8fa;border-bottom:1px solid var(--line)}
-    #eab-code .wipcap{font-size:12px;color:var(--mut);padding:8px 10px 10px;line-height:1.42}
+
+    /* ---- cards ---- */
+    #eab-code .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:12px;align-items:start}
+    #eab-code .card{border:1px solid var(--line);border-radius:10px;padding:13px 14px 12px;background:var(--bg);
+      display:flex;flex-direction:column;transition:.14s}
+    #eab-code .card:hover{border-color:#ccd4d9;box-shadow:0 2px 10px rgba(20,30,40,.05)}
+    #eab-code .card h3{margin:0 0 3px;font-size:13.5px;font-weight:700;line-height:1.3;letter-spacing:-.01em}
+    #eab-code .card .sol{margin:0 0 8px;font-size:12px;color:var(--mut);line-height:1.45}
+    #eab-code .lbl{font-size:9.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#949ca3;margin:9px 0 5px}
+
+    /* ---- tokens: .cmd = a command you can type, .pill = a project/repo ---- */
+    #eab-code .links{display:flex;flex-wrap:wrap;gap:5px}
+    #eab-code .pkg{display:inline-flex;align-items:stretch;gap:2px}
+    #eab-code .cmd,#eab-code .pill{display:inline-block;font-size:11.5px;font-weight:600;text-decoration:none;
+      color:var(--acc2);background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:3px 7px;
+      transition:.12s;white-space:nowrap}
+    #eab-code .cmd{font-family:var(--mono);font-size:11px;letter-spacing:-.01em;padding:3px 6px}
+    #eab-code .cmd:hover,#eab-code .pill:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+    #eab-code .ssc{display:inline-flex;align-items:center;font-family:var(--mono);font-size:8.5px;font-weight:700;
+      letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--gold);background:var(--goldbg);
+      border:1px solid var(--goldln);border-radius:4px;padding:0 4px;transition:.12s}
+    #eab-code .ssc:hover{background:var(--gold);border-color:var(--gold);color:#fff}
+    #eab-code .pill.demo{color:var(--acc);background:#fff;border-color:#cfe3e3}
+    #eab-code .pill.demo:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+    #eab-code .tx{display:inline-flex;align-items:center;font-size:8.5px;font-weight:700;letter-spacing:.05em;
+      padding:0 4px;border-radius:4px;color:#2c5478;background:#eef3f8;border:1px solid #d5e2ee}
+
+    /* ---- works in progress ---- */
+    #eab-code .card.wip{grid-column:1/-1;border-style:dashed;background:#fffdf8}
+    #eab-code .card.wip .pill,#eab-code .card.wip .cmd{background:#fff}
+    #eab-code .wipgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px;margin:5px 0 2px}
+    #eab-code .wipcard{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--line);
+      border-radius:8px;overflow:hidden;background:#fff;transition:.14s}
+    #eab-code .wipcard:hover{border-color:var(--acc);box-shadow:0 2px 10px rgba(20,30,40,.07)}
+    #eab-code .wipcard img{display:block;width:100%;height:130px;object-fit:cover;object-position:left top;
+      background:#fff;border-bottom:1px solid var(--line)}
+    #eab-code .wipcap{font-size:11.5px;color:var(--mut);padding:7px 9px 9px;line-height:1.4}
     #eab-code .wipcap b{color:var(--ink)}
-    #eab-code .wiplist{list-style:none;margin:4px 0 2px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:7px 18px}
-    #eab-code .wiplist li{font-size:12.5px;color:var(--mut);line-height:1.45}
-    #eab-code .wiplist a{font-weight:700;color:var(--acc2);text-decoration:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    #eab-code .wiplist{list-style:none;margin:4px 0 2px;padding:0;display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:6px 18px}
+    #eab-code .wiplist li{font-size:11.5px;color:var(--mut);line-height:1.45}
+    #eab-code .wiplist a{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--acc2);text-decoration:none}
     #eab-code .wiplist a:hover{color:var(--acc);text-decoration:underline}
-    #eab-code .noresults{display:none;padding:22px 4px;color:var(--mut);font-size:14px}
-    #eab-code .foot{margin:22px 0 0;padding-top:14px;border-top:1px solid var(--line);font-size:13.5px;color:var(--mut)}
+
+    /* ---- misc ---- */
+    #eab-code .noresults{display:none;padding:20px 4px;color:var(--mut);font-size:13px}
+    #eab-code .foot{margin:18px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--mut)}
     #eab-code .foot a{color:var(--acc);font-weight:600;text-decoration:none}
-    #eab-code .foot .legend{font-size:12.5px;margin:6px 0 0}
-    #eab-code .foot .tag{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:6px;color:#8a5a00;background:#fbf3e2;border:1px solid #efe1c0;vertical-align:middle}
+    #eab-code .foot .legend{font-size:11.5px;margin:5px 0 0}
+    #eab-code .foot .tag{display:inline-block;font-family:var(--mono);font-size:8.5px;font-weight:700;padding:2px 4px;
+      border-radius:4px;color:var(--gold);background:var(--goldbg);border:1px solid var(--goldln);
+      vertical-align:middle;text-transform:uppercase}
+    @media (max-width:620px){
+      #eab-code .mast{align-items:flex-start}
+      #eab-code .stats{gap:16px}
+      #eab-code .stats div{text-align:left}
+    }
     /* ---------- output gallery (a sample of the index above) ---------- */
     #eab-code .card.gx{grid-column:1/-1;background:var(--soft);padding-bottom:0;overflow:hidden}
     #eab-code .gx-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
@@ -100,10 +144,20 @@
     @media (prefers-reduced-motion:reduce){#eab-code .gx-strip{scroll-behavior:auto}}
   </style>
 
-  <p class="lead">A working library of open-source tools I've built for research, evaluation, and data workflows — mostly in
-    <strong>Stata</strong> and <strong>Python</strong>. Search or pick a problem below, then click a name for the source on GitHub,
-    or the <span style="color:#8a5a00;font-weight:700">SSC</span> tag to install from the SSC archive. Full index at
-    <a href="https://github.com/ericabooth" target="_blank" rel="noopener">github.com/ericabooth</a>.</p>
+  <header class="mast">
+    <div>
+      <h1>Eric A. Booth &mdash; code portfolio</h1>
+      <p>Open-source tools for research, evaluation and data work, mostly in <strong>Stata</strong> and
+        <strong>Python</strong>. Pick a problem below or search. A <code>monospace</code> name is a command you can
+        type; <span class="tag">SSC</span> means it installs from the SSC archive. Everything is on
+        <a href="https://github.com/ericabooth" target="_blank" rel="noopener">github.com/ericabooth</a>.</p>
+    </div>
+    <div class="stats">
+      <div><b>47</b><span>Commands</span></div>
+      <div><b>25</b><span>On SSC</span></div>
+      <div><b>10</b><span>Outputs</span></div>
+    </div>
+  </header>
 
   <div class="search">
     <input id="eab-q" type="text" autocomplete="off" placeholder="Search tools&hellip;  (e.g. reshape, google, dashboard, blackjack)">
@@ -123,16 +177,16 @@
 
   <div class="grid">
     <div class="card" data-c="viz">
-      <h3>Turn Stata output into live web dashboards &amp; charts</h3>
+      <h3>Publish dashboards, charts &amp; maps from Stata</h3>
       <p class="sol">Publish interactive HTML/JS pages — charts, dashboards, tables, and maps — straight from a Stata do-file.</p>
       <div class="lbl">Code</div>
       <div class="links">
-        <span class="pkg"><a class="pill" href="https://github.com/ericabooth/dashboardbuilder-stata-public" target="_blank" rel="noopener">DashboardBuilder</a><a class="pill ssc" title="ssc install dashboardbuilder" href="https://ideas.repec.org/c/boc/bocode/s459841.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" href="https://github.com/ericabooth/googlechart-stata-public" target="_blank" rel="noopener">GoogleChart</a><a class="pill ssc" title="ssc install googlechart" href="https://ideas.repec.org/c/boc/bocode/s459837.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" href="https://github.com/ericabooth/StataShiny-public" target="_blank" rel="noopener">StataShiny</a><a class="pill ssc" title="ssc install statashiny" href="https://ideas.repec.org/c/boc/bocode/s459829.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" href="https://github.com/ericabooth/webdoc2-stata-public" target="_blank" rel="noopener">Webdoc2</a></span>
-        <span class="pkg"><a class="pill" title="Stamp a logo or PNG onto a Stata graph." href="https://github.com/ericabooth/addlogo-stata-public" target="_blank" rel="noopener">addlogo</a><a class="pill ssc" title="ssc install addlogo" href="https://ideas.repec.org/c/boc/bocode/s459845.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" title="Interactive small-multiple sparkline maps for Texas data (NCES) — a Texas 2036 tool." href="https://ericabooth.github.io/Sparkta2_Example_Site/" target="_blank" rel="noopener">sparkta2</a><span class="tx" title="A Texas 2036 contribution">TX2036</span></span>
+        <span class="pkg"><a class="cmd" href="https://github.com/ericabooth/dashboardbuilder-stata-public" target="_blank" rel="noopener">dashboardbuilder</a><a class="ssc" title="ssc install dashboardbuilder" href="https://ideas.repec.org/c/boc/bocode/s459841.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" href="https://github.com/ericabooth/googlechart-stata-public" target="_blank" rel="noopener">googlechart</a><a class="ssc" title="ssc install googlechart" href="https://ideas.repec.org/c/boc/bocode/s459837.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" href="https://github.com/ericabooth/StataShiny-public" target="_blank" rel="noopener">statashiny</a><a class="ssc" title="ssc install statashiny" href="https://ideas.repec.org/c/boc/bocode/s459829.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" href="https://github.com/ericabooth/webdoc2-stata-public" target="_blank" rel="noopener">webdoc2</a></span>
+        <span class="pkg"><a class="cmd" title="Stamp a logo or PNG onto a Stata graph." href="https://github.com/ericabooth/addlogo-stata-public" target="_blank" rel="noopener">addlogo</a><a class="ssc" title="ssc install addlogo" href="https://ideas.repec.org/c/boc/bocode/s459845.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" title="Interactive small-multiple sparkline maps and charts for Stata (a Texas 2036 tool)." href="https://github.com/ericabooth/sparkta2-stata-public" target="_blank" rel="noopener">sparkta2</a><span class="tx" title="A Texas 2036 contribution">TX2036</span></span>
       </div>
       <div class="lbl">Live demos</div>
       <div class="links">
@@ -151,13 +205,13 @@
       <p class="sol">Call web APIs, read/write Google Sheets, work off Google Drive, pull in R data, query an LLM, and convert or edit any file — without leaving Stata.</p>
       <div class="lbl">Code</div>
       <div class="links">
-        <span class="pkg"><a class="pill" href="https://github.com/ericabooth/WebAPI-stata-public" target="_blank" rel="noopener">WebAPI / JSON</a><a class="pill ssc" title="ssc install webapi" href="https://ideas.repec.org/c/boc/bocode/s459826.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" href="https://github.com/ericabooth/googlesheets-stata-public" target="_blank" rel="noopener">GoogleSheets</a><a class="pill ssc" title="ssc install googlesheets" href="https://ideas.repec.org/c/boc/bocode/s459836.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" href="https://github.com/texas-2036/driveuse-stata-public" target="_blank" rel="noopener">DriveUse</a></span>
-        <span class="pkg"><a class="pill" href="https://github.com/ericabooth/Gemini-stata" target="_blank" rel="noopener">Gemini-in-Stata</a><a class="pill ssc" title="ssc install gemini" href="https://ideas.repec.org/c/boc/bocode/s459838.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" href="https://github.com/ericabooth/importR-stata" target="_blank" rel="noopener">importR</a><a class="pill ssc" title="ssc install importr" href="https://ideas.repec.org/c/boc/bocode/s459835.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" href="https://github.com/ericabooth/convertanything-stata-public" target="_blank" rel="noopener">ConvertAnything</a><a class="pill ssc" title="ssc install convertanything" href="https://ideas.repec.org/c/boc/bocode/s459842.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" href="https://github.com/ericabooth/EditAnything-stata-public" target="_blank" rel="noopener">EditAnything</a><a class="pill ssc" title="ssc install editanything" href="http://fmwww.bc.edu/repec/bocode/e/editanything.pkg" target="_blank" rel="noopener">SSC</a></span>
+        <span class="pkg"><a class="cmd" href="https://github.com/ericabooth/WebAPI-stata-public" target="_blank" rel="noopener">webapi</a><a class="ssc" title="ssc install webapi" href="https://ideas.repec.org/c/boc/bocode/s459826.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" href="https://github.com/ericabooth/googlesheets-stata-public" target="_blank" rel="noopener">googlesheets</a><a class="ssc" title="ssc install googlesheets" href="https://ideas.repec.org/c/boc/bocode/s459836.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" href="https://github.com/texas-2036/driveuse-stata-public" target="_blank" rel="noopener">driveuse</a></span>
+        <span class="pkg"><a class="cmd" href="https://github.com/ericabooth/Gemini-stata" target="_blank" rel="noopener">gemini</a><a class="ssc" title="ssc install gemini" href="https://ideas.repec.org/c/boc/bocode/s459838.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" href="https://github.com/ericabooth/importR-stata" target="_blank" rel="noopener">importr</a><a class="ssc" title="ssc install importr" href="https://ideas.repec.org/c/boc/bocode/s459835.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" href="https://github.com/ericabooth/convertanything-stata-public" target="_blank" rel="noopener">convertanything</a><a class="ssc" title="ssc install convertanything" href="https://ideas.repec.org/c/boc/bocode/s459842.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" href="https://github.com/ericabooth/EditAnything-stata-public" target="_blank" rel="noopener">editanything</a><a class="ssc" title="ssc install editanything" href="http://fmwww.bc.edu/repec/bocode/e/editanything.pkg" target="_blank" rel="noopener">ssc</a></span>
       </div>
     </div>
 
@@ -169,7 +223,8 @@
         <a class="pill" href="https://github.com/ericabooth/TEA-TAPR-download" target="_blank" rel="noopener">TEA TAPR</a>
         <a class="pill" href="https://github.com/ericabooth/TEA-SummaryofFinances-Scrape-Public" target="_blank" rel="noopener">TEA Finances</a>
         <a class="pill" href="https://github.com/ericabooth/InsurancePriceTransparency-public" target="_blank" rel="noopener">Insurance Prices</a>
-        <a class="pill" href="https://github.com/ericabooth/ScrapeSSC-stata-public" target="_blank" rel="noopener">ScrapeSSC</a>
+        <a class="cmd" href="https://github.com/ericabooth/ScrapeSSC-stata-public" target="_blank" rel="noopener">scrapessc</a>
+        <span class="pkg"><a class="cmd" title="Pull ERCOT grid data (prices, load, generation) straight into Stata." href="https://github.com/ericabooth/ercotapi-stata-public" target="_blank" rel="noopener">ercotapi</a></span>
       </div>
     </div>
 
@@ -178,36 +233,37 @@
       <p class="sol">Match and validate records, combine and reshape files, rebuild variables, generate codebooks, track data lineage, and de-identify data for safe public release.</p>
       <div class="lbl">Match &amp; validate</div>
       <div class="links">
-        <span class="pkg"><a class="pill" title="Near(est) / fuzzy merge in Stata." href="https://github.com/ericabooth/Nearmrg-stata" target="_blank" rel="noopener">Nearmrg</a><a class="pill ssc" title="ssc install nearmrg" href="https://ideas.repec.org/c/boc/bocode/s459834.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" title="Validate and clean email addresses from open-ended survey items." href="https://github.com/ericabooth/ValidEmail-stata" target="_blank" rel="noopener">ValidEmail</a><a class="pill ssc" title="ssc install validemail" href="https://ideas.repec.org/c/boc/bocode/s459827.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" title="Turn data in memory into reproducible -input- code." href="https://github.com/ericabooth/Writeinput-Stata" target="_blank" rel="noopener">Writeinput</a><a class="pill ssc" title="ssc install writeinput" href="https://ideas.repec.org/c/boc/bocode/s459825.html" target="_blank" rel="noopener">SSC</a></span>
+        <span class="pkg"><a class="cmd" title="Near(est) / fuzzy merge in Stata." href="https://github.com/ericabooth/Nearmrg-stata" target="_blank" rel="noopener">nearmrg</a><a class="ssc" title="ssc install nearmrg" href="https://ideas.repec.org/c/boc/bocode/s459834.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" title="Validate and clean email addresses from open-ended survey items." href="https://github.com/ericabooth/ValidEmail-stata" target="_blank" rel="noopener">validemail</a><a class="ssc" title="ssc install validemail" href="https://ideas.repec.org/c/boc/bocode/s459827.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" title="Turn data in memory into reproducible -input- code." href="https://github.com/ericabooth/Writeinput-Stata" target="_blank" rel="noopener">writeinput</a><a class="ssc" title="ssc install writeinput" href="https://ideas.repec.org/c/boc/bocode/s459825.html" target="_blank" rel="noopener">ssc</a></span>
       </div>
       <div class="lbl">Reshape &amp; combine</div>
       <div class="links">
-        <span class="pkg"><a class="pill" title="Append, merge, or joinby — or convert — every file in a directory, with a year-harmonization layer." href="https://github.com/ericabooth/combineall-stata-public" target="_blank" rel="noopener">combineall</a><a class="pill ssc" title="ssc install combineall" href="https://ideas.repec.org/c/boc/bocode/s459843.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" title="Recursive / auto reshape syntax builder — a dry-run advisor." href="https://github.com/ericabooth/reshapehelper-stata-public" target="_blank" rel="noopener">reshapehelper</a><a class="pill ssc" title="ssc install reshapehelper" href="https://ideas.repec.org/c/boc/bocode/s459831.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" title="Recombine dummy / indicator variables back into one categorical variable." href="https://github.com/ericabooth/undummy-stata-public" target="_blank" rel="noopener">undummy</a></span>
-        <span class="pkg"><a class="pill" title="Map every merge, append and join across a set of do-files &mdash; scan, run, draw." href="https://github.com/ericabooth/mergemap-stata-public" target="_blank" rel="noopener">mergemap</a><a class="pill demo" title="Every mergemap output from one fake pipeline" href="galleries/mergemap/" target="_blank" rel="noopener">Gallery &#8599;</a></span>
+        <span class="pkg"><a class="cmd" title="Append, merge, or joinby — or convert — every file in a directory, with a year-harmonization layer." href="https://github.com/ericabooth/combineall-stata-public" target="_blank" rel="noopener">combineall</a><a class="ssc" title="ssc install combineall" href="https://ideas.repec.org/c/boc/bocode/s459843.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" title="Recursive / auto reshape syntax builder — a dry-run advisor." href="https://github.com/ericabooth/reshapehelper-stata-public" target="_blank" rel="noopener">reshapehelper</a><a class="ssc" title="ssc install reshapehelper" href="https://ideas.repec.org/c/boc/bocode/s459831.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" title="Recombine dummy / indicator variables back into one categorical variable." href="https://github.com/ericabooth/undummy-stata-public" target="_blank" rel="noopener">undummy</a></span>
+        <span class="pkg"><a class="cmd" title="Map every merge, append and join across a set of do-files &mdash; scan, run, draw." href="https://github.com/ericabooth/mergemap-stata-public" target="_blank" rel="noopener">mergemap</a><a class="pill demo" title="Every mergemap output from one fake pipeline" href="galleries/mergemap/" target="_blank" rel="noopener">Gallery &#8599;</a></span>
       </div>
       <div class="lbl">Document &amp; trace</div>
       <div class="links">
-        <span class="pkg"><a class="pill" title="Enhanced, over-time-ready codebook generator — a modern descsave." href="https://github.com/ericabooth/datadictionary-stata-public" target="_blank" rel="noopener">datadictionary</a><a class="pill ssc" title="ssc install datadictionary" href="https://ideas.repec.org/c/boc/bocode/s459840.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" title="Apply variable labels from a two-column (Variable, Label) crosswalk." href="https://github.com/ericabooth/applyvarlabels-stata-public" target="_blank" rel="noopener">applyvarlabels</a><a class="pill ssc" title="ssc install applyvarlabels" href="https://ideas.repec.org/c/boc/bocode/s459844.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" title="Stamp variables with source lineage and search that provenance later." href="https://github.com/ericabooth/srctag-stata-public" target="_blank" rel="noopener">srctag</a></span>
-        <span class="pkg"><a class="pill" title="Rebuild a cross-wave survey codebook from a long-format crosswalk." href="https://github.com/ericabooth/cxchangelog-stata-public" target="_blank" rel="noopener">cxchangelog</a></span>
-        <span class="pkg"><a class="pill" title="Map how respondents moved through a survey, separating answers, refusals, and skip-logic skips." href="https://github.com/ericabooth/surveymap-stata-public" target="_blank" rel="noopener">surveymap</a><a class="pill demo" title="Every surveymap output from one fake survey" href="galleries/surveymap/" target="_blank" rel="noopener">Gallery &#8599;</a></span>
+        <span class="pkg"><a class="cmd" title="Enhanced, over-time-ready codebook generator — a modern descsave." href="https://github.com/ericabooth/datadictionary-stata-public" target="_blank" rel="noopener">datadictionary</a><a class="ssc" title="ssc install datadictionary" href="https://ideas.repec.org/c/boc/bocode/s459840.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" title="Apply variable labels from a two-column (Variable, Label) crosswalk." href="https://github.com/ericabooth/applyvarlabels-stata-public" target="_blank" rel="noopener">applyvarlabels</a><a class="ssc" title="ssc install applyvarlabels" href="https://ideas.repec.org/c/boc/bocode/s459844.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" title="Stamp variables with source lineage and search that provenance later." href="https://github.com/ericabooth/srctag-stata-public" target="_blank" rel="noopener">srctag</a></span>
+        <span class="pkg"><a class="cmd" title="Rebuild a cross-wave survey codebook from a long-format crosswalk." href="https://github.com/ericabooth/cxchangelog-stata-public" target="_blank" rel="noopener">cxchangelog</a></span>
+        <span class="pkg"><a class="cmd" title="Map how respondents moved through a survey, separating answers, refusals, and skip-logic skips." href="https://github.com/ericabooth/surveymap-stata-public" target="_blank" rel="noopener">surveymap</a><a class="pill demo" title="Every surveymap output from one fake survey" href="galleries/surveymap/" target="_blank" rel="noopener">Gallery &#8599;</a></span>
       </div>
-      <div class="lbl">De-identify for release</div>
+      <div class="lbl">Release &amp; archive</div>
       <div class="links">
-        <a class="pill" title="k-anonymity re-identification scan over quasi-identifiers." href="https://github.com/ericabooth/riskscan-stata-public" target="_blank" rel="noopener">riskscan</a>
-        <a class="pill" title="Primary and complementary small-cell suppression for public-release tables." href="https://github.com/ericabooth/suppress-stata-public" target="_blank" rel="noopener">suppress</a>
-        <a class="pill" title="Rank-preserving synthetic stand-in datasets for safe collaboration." href="https://github.com/ericabooth/synthgen-stata-public" target="_blank" rel="noopener">synthgen</a>
+        <a class="cmd" title="k-anonymity re-identification scan over quasi-identifiers." href="https://github.com/ericabooth/riskscan-stata-public" target="_blank" rel="noopener">riskscan</a>
+        <a class="cmd" title="Primary and complementary small-cell suppression for public-release tables." href="https://github.com/ericabooth/suppress-stata-public" target="_blank" rel="noopener">suppress</a>
+        <a class="cmd" title="Rank-preserving synthetic stand-in datasets for safe collaboration." href="https://github.com/ericabooth/synthgen-stata-public" target="_blank" rel="noopener">synthgen</a>
+        <span class="pkg"><a class="cmd" title="Build portable, archive-ready copies of a dataset for Stata, R and Python in one step." href="https://github.com/ericabooth/datadeposit" target="_blank" rel="noopener">datadeposit</a></span>
       </div>
       <div class="lbl">Format &amp; utilities</div>
       <div class="links">
-        <span class="pkg"><a class="pill" title="Identify differences in values across observations for a variable." href="https://ideas.repec.org/c/boc/bocode/s457272.html" target="_blank" rel="noopener">obsdiff</a><a class="pill ssc" title="ssc install obsdiff" href="https://ideas.repec.org/c/boc/bocode/s457272.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" title="Convert numbers to their word form." href="https://ideas.repec.org/c/boc/bocode/s457273.html" target="_blank" rel="noopener">num2words</a><a class="pill ssc" title="ssc install num2words" href="https://ideas.repec.org/c/boc/bocode/s457273.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" title="Generate pseudo-random characters or words." href="https://ideas.repec.org/c/boc/bocode/s457277.html" target="_blank" rel="noopener">ralpha</a><a class="pill ssc" title="ssc install ralpha" href="https://ideas.repec.org/c/boc/bocode/s457277.html" target="_blank" rel="noopener">SSC</a></span>
+        <span class="pkg"><a class="cmd" title="Identify differences in values across observations for a variable." href="https://ideas.repec.org/c/boc/bocode/s457272.html" target="_blank" rel="noopener">obsdiff</a><a class="ssc" title="ssc install obsdiff" href="https://ideas.repec.org/c/boc/bocode/s457272.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" title="Convert numbers to their word form." href="https://ideas.repec.org/c/boc/bocode/s457273.html" target="_blank" rel="noopener">num2words</a><a class="ssc" title="ssc install num2words" href="https://ideas.repec.org/c/boc/bocode/s457273.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" title="Generate pseudo-random characters or words." href="https://ideas.repec.org/c/boc/bocode/s457277.html" target="_blank" rel="noopener">ralpha</a><a class="ssc" title="ssc install ralpha" href="https://ideas.repec.org/c/boc/bocode/s457277.html" target="_blank" rel="noopener">ssc</a></span>
       </div>
     </div>
 
@@ -216,16 +272,17 @@
       <p class="sol">Estimation and inference tools for evaluation work — matching, shrinkage, multilevel R-squared, simulation, conformal and nonparametric methods — plus applied research and replication materials.</p>
       <div class="lbl">Estimation &amp; inference</div>
       <div class="links">
-        <a class="pill" title="Policy-twin selection by Mahalanobis distance (nearest-neighbor matching)." href="https://github.com/ericabooth/twinmatch-stata-public" target="_blank" rel="noopener">twinmatch</a>
-        <a class="pill" title="Empirical-Bayes shrinkage for noisy, small-denominator rates." href="https://github.com/ericabooth/rateshrink-stata-public" target="_blank" rel="noopener">rateshrink</a>
-        <a class="pill" title="Nakagawa marginal and conditional R-squared after -mixed- (multilevel models)." href="https://github.com/ericabooth/hlmr2-stata-public" target="_blank" rel="noopener">hlmr2</a>
-        <a class="pill" title="Monte Carlo return-on-investment simulation with tornado-diagram export." href="https://github.com/ericabooth/roisim-stata-public" target="_blank" rel="noopener">roisim</a>
-        <a class="pill" title="Split-conformal, distribution-free prediction intervals for regress and poisson." href="https://github.com/ericabooth/conformalpred-stata-public" target="_blank" rel="noopener">conformalpred</a>
-        <a class="pill" title="Nonlinear Nonparametric Statistics (NNS) regression in Stata." href="https://github.com/ericabooth/NNS-stata-public" target="_blank" rel="noopener">NNS</a>
+        <a class="cmd" title="Policy-twin selection by Mahalanobis distance (nearest-neighbor matching)." href="https://github.com/ericabooth/twinmatch-stata-public" target="_blank" rel="noopener">twinmatch</a>
+        <a class="cmd" title="Empirical-Bayes shrinkage for noisy, small-denominator rates." href="https://github.com/ericabooth/rateshrink-stata-public" target="_blank" rel="noopener">rateshrink</a>
+        <a class="cmd" title="Nakagawa marginal and conditional R-squared after -mixed- (multilevel models)." href="https://github.com/ericabooth/hlmr2-stata-public" target="_blank" rel="noopener">hlmr2</a>
+        <a class="cmd" title="Monte Carlo return-on-investment simulation with tornado-diagram export." href="https://github.com/ericabooth/roisim-stata-public" target="_blank" rel="noopener">roisim</a>
+        <a class="cmd" title="Split-conformal, distribution-free prediction intervals for regress and poisson." href="https://github.com/ericabooth/conformalpred-stata-public" target="_blank" rel="noopener">conformalpred</a>
+        <a class="cmd" title="Nonlinear Nonparametric Statistics (NNS) regression in Stata." href="https://github.com/ericabooth/NNS-stata-public" target="_blank" rel="noopener">nns</a>
+        <span class="pkg"><a class="cmd" title="Choose a comparison group for one unit and test how much that choice matters: ten methods, three robustness checks." href="https://github.com/ericabooth/peerpick-stata-public" target="_blank" rel="noopener">peerpick</a></span>
       </div>
       <div class="lbl">Applied research &amp; replication</div>
       <div class="links">
-        <a class="pill" title="Estimate undocumented population sizes via ACS / MPI / CMS / DHS triangulation." href="https://github.com/ericabooth/residualundoc-stata-public" target="_blank" rel="noopener">residualundoc</a>
+        <a class="cmd" title="Estimate undocumented population sizes via ACS / MPI / CMS / DHS triangulation." href="https://github.com/ericabooth/residualundoc-stata-public" target="_blank" rel="noopener">residualundoc</a>
         <a class="pill" title="Pre-print and replication materials for the Beta-Binomial reliability paper." href="https://github.com/ericabooth/BetaBinomialPaperMaterials" target="_blank" rel="noopener">Beta-Binomial paper</a>
         <span class="pkg"><a class="pill" title="Working paper: economic opportunities for musicians and creatives." href="https://github.com/ericabooth/EconomicOutlook_MusiciansCreatives-public" target="_blank" rel="noopener">Musicians &amp; Creatives WP</a><span class="tx" title="A Texas 2036 contribution">TX2036</span></span>
       </div>
@@ -236,10 +293,10 @@
       <p class="sol">Scaffold and back up whole analysis projects, install what a do-file needs, generate timesheets, auto-build multicam video timelines, and convert documents.</p>
       <div class="lbl">Set up &amp; maintain projects</div>
       <div class="links">
-        <span class="pkg"><a class="pill" title="Scaffold a data-analysis project folder with a numbered do-file pipeline." href="https://github.com/ericabooth/projectbuilder-stata-public" target="_blank" rel="noopener">projectbuilder</a><a class="pill ssc" title="ssc install projectbuilder" href="https://ideas.repec.org/c/boc/bocode/s459832.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" title="Zip up a project folder, subfolders included, natively in Stata." href="https://github.com/ericabooth/projectbackup-stata-public" target="_blank" rel="noopener">projectbackup</a><a class="pill ssc" title="ssc install projectbackup" href="https://ideas.repec.org/c/boc/bocode/s459833.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" title="Find, verify, and install every user-written package a do-file needs." href="https://github.com/ericabooth/usepackage-stata-public" target="_blank" rel="noopener">usepackage</a><a class="pill ssc" title="ssc install usepackage" href="https://ideas.repec.org/c/boc/bocode/s459828.html" target="_blank" rel="noopener">SSC</a></span>
-        <span class="pkg"><a class="pill" title="Unabbreviate a global macro list." href="https://ideas.repec.org/c/boc/bocode/s457278.html" target="_blank" rel="noopener">mac_unab</a><a class="pill ssc" title="ssc install mac_unab" href="https://ideas.repec.org/c/boc/bocode/s457278.html" target="_blank" rel="noopener">SSC</a></span>
+        <span class="pkg"><a class="cmd" title="Scaffold a data-analysis project folder with a numbered do-file pipeline." href="https://github.com/ericabooth/projectbuilder-stata-public" target="_blank" rel="noopener">projectbuilder</a><a class="ssc" title="ssc install projectbuilder" href="https://ideas.repec.org/c/boc/bocode/s459832.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" title="Zip up a project folder, subfolders included, natively in Stata." href="https://github.com/ericabooth/projectbackup-stata-public" target="_blank" rel="noopener">projectbackup</a><a class="ssc" title="ssc install projectbackup" href="https://ideas.repec.org/c/boc/bocode/s459833.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" title="Find, verify, and install every user-written package a do-file needs." href="https://github.com/ericabooth/usepackage-stata-public" target="_blank" rel="noopener">usepackage</a><a class="ssc" title="ssc install usepackage" href="https://ideas.repec.org/c/boc/bocode/s459828.html" target="_blank" rel="noopener">ssc</a></span>
+        <span class="pkg"><a class="cmd" title="Unabbreviate a global macro list." href="https://ideas.repec.org/c/boc/bocode/s457278.html" target="_blank" rel="noopener">mac_unab</a><a class="ssc" title="ssc install mac_unab" href="https://ideas.repec.org/c/boc/bocode/s457278.html" target="_blank" rel="noopener">ssc</a></span>
       </div>
       <div class="lbl">Documents, media &amp; pipelines</div>
       <div class="links">
@@ -258,7 +315,7 @@
       <div class="links">
         <a class="pill" href="https://github.com/ericabooth/Book-Manuscript-Applied-Evaluation-Stata" target="_blank" rel="noopener">Evaluation book</a>
         <a class="pill" href="https://github.com/ericabooth/NSF-Applied-Evaluation-Workshop" target="_blank" rel="noopener">NSF workshop</a>
-        <span class="pkg"><a class="pill" title="Navigate SMCL slides, presentations, and tutorials in the Stata Viewer." href="https://github.com/ericabooth/Slideviewer-Stata" target="_blank" rel="noopener">Slideviewer</a><a class="pill ssc" title="ssc install slideviewer" href="https://ideas.repec.org/c/boc/bocode/s459830.html" target="_blank" rel="noopener">SSC</a></span>
+        <span class="pkg"><a class="cmd" title="Navigate SMCL slides, presentations, and tutorials in the Stata Viewer." href="https://github.com/ericabooth/Slideviewer-Stata" target="_blank" rel="noopener">slideviewer</a><a class="ssc" title="ssc install slideviewer" href="https://ideas.repec.org/c/boc/bocode/s459830.html" target="_blank" rel="noopener">ssc</a></span>
       </div>
     </div>
 
@@ -414,7 +471,7 @@
     </section>
 
     <div class="card wip" data-c="wip">
-      <h3>Bonus &mdash; works in progress &amp; local utilities</h3>
+      <h3>Works in progress &amp; local utilities</h3>
       <p class="sol">Fun experiments and personal Stata scripts that live in my adopath but aren't packaged on GitHub or SSC. Browse them in a shared Google Drive folder; in Stata, type <code>which <em>cmd</em></code> to see any command's syntax.</p>
       <div class="wipgrid">
         <a class="wipcard" href="https://drive.google.com/drive/folders/15Ak5pKCxmXntJM7wwXScGQi_TvEL0Mn3?usp=sharing" target="_blank" rel="noopener">
